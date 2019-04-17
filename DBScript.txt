@@ -1,0 +1,127 @@
+CREATE DATABASE PMS
+GO
+USE [PMS]
+GO
+/****** Object:  Table [dbo].[Orders]    Script Date: 12/04/2019 11:17:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Orders](
+	[OrderId] [int] IDENTITY(1,1) NOT NULL,
+	[OrderNum] [varchar](50) NOT NULL,
+	[OrderBy] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[IsPaid] [bit] NOT NULL,
+	[TotalAmount] [float] NULL,
+	[IsActive] [bit] NOT NULL,
+	[OrderStatus] [varchar](50) NULL,
+ CONSTRAINT [PK_Orders] PRIMARY KEY CLUSTERED 
+(
+	[OrderId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ProductOrderMapping]    Script Date: 12/04/2019 11:17:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ProductOrderMapping](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ProductId] [int] NOT NULL,
+	[OrderId] [int] NOT NULL,
+ CONSTRAINT [PK_ProductOrderMapping] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Products]    Script Date: 12/04/2019 11:17:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Products](
+	[ProductId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](100) NOT NULL,
+	[Price] [float] NOT NULL,
+	[PictureName] [varchar](100) NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[CreatedBy] [int] NOT NULL,
+	[ModifiedBy] [int] NULL,
+	[ModifiedOn] [datetime] NULL,
+	[IsActive] [bit] NOT NULL,
+ CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED 
+(
+	[ProductId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 12/04/2019 11:17:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[UserId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](70) NOT NULL,
+	[Login] [varchar](70) NOT NULL,
+	[Password] [varchar](50) NOT NULL,
+	[PictureName] [varchar](100) NULL,
+	[Role] [int] NOT NULL,
+	[IsActive] [bit] NOT NULL,
+	[CreatedBy] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[ModifiedBy] [int] NULL,
+	[ModifiedOn] [datetime] NULL,
+ CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+SET IDENTITY_INSERT [dbo].[Orders] ON 
+
+INSERT [dbo].[Orders] ([OrderId], [OrderNum], [OrderBy], [CreatedOn], [IsPaid], [TotalAmount], [IsActive], [OrderStatus]) VALUES (1, N'ORD#1', 2, CAST(N'2019-04-12T13:05:07.970' AS DateTime), 1, 250, 1, N'pending')
+INSERT [dbo].[Orders] ([OrderId], [OrderNum], [OrderBy], [CreatedOn], [IsPaid], [TotalAmount], [IsActive], [OrderStatus]) VALUES (2, N'ORD#1', 3, CAST(N'2019-04-12T13:09:13.580' AS DateTime), 1, 250, 1, N'pending')
+INSERT [dbo].[Orders] ([OrderId], [OrderNum], [OrderBy], [CreatedOn], [IsPaid], [TotalAmount], [IsActive], [OrderStatus]) VALUES (3, N'ORD#1', 4, CAST(N'2019-04-12T13:21:20.790' AS DateTime), 1, 250, 0, N'pending')
+INSERT [dbo].[Orders] ([OrderId], [OrderNum], [OrderBy], [CreatedOn], [IsPaid], [TotalAmount], [IsActive], [OrderStatus]) VALUES (4, N'ORD#1', 2, CAST(N'2019-04-12T17:07:40.573' AS DateTime), 1, 250, 1, N'complete')
+SET IDENTITY_INSERT [dbo].[Orders] OFF
+SET IDENTITY_INSERT [dbo].[ProductOrderMapping] ON 
+
+INSERT [dbo].[ProductOrderMapping] ([Id], [ProductId], [OrderId]) VALUES (1, 1, 1)
+INSERT [dbo].[ProductOrderMapping] ([Id], [ProductId], [OrderId]) VALUES (2, 2, 1)
+INSERT [dbo].[ProductOrderMapping] ([Id], [ProductId], [OrderId]) VALUES (3, 3, 1)
+INSERT [dbo].[ProductOrderMapping] ([Id], [ProductId], [OrderId]) VALUES (4, 1, 2)
+INSERT [dbo].[ProductOrderMapping] ([Id], [ProductId], [OrderId]) VALUES (5, 3, 2)
+INSERT [dbo].[ProductOrderMapping] ([Id], [ProductId], [OrderId]) VALUES (6, 2, 3)
+INSERT [dbo].[ProductOrderMapping] ([Id], [ProductId], [OrderId]) VALUES (7, 3, 3)
+INSERT [dbo].[ProductOrderMapping] ([Id], [ProductId], [OrderId]) VALUES (8, 4, 3)
+INSERT [dbo].[ProductOrderMapping] ([Id], [ProductId], [OrderId]) VALUES (9, 2, 3)
+INSERT [dbo].[ProductOrderMapping] ([Id], [ProductId], [OrderId]) VALUES (10, 1, 3)
+SET IDENTITY_INSERT [dbo].[ProductOrderMapping] OFF
+SET IDENTITY_INSERT [dbo].[Products] ON 
+
+INSERT [dbo].[Products] ([ProductId], [Name], [Price], [PictureName], [CreatedOn], [CreatedBy], [ModifiedBy], [ModifiedOn], [IsActive]) VALUES (1, N'Pizza', 800, N'aa', CAST(N'2019-02-01T00:00:00.000' AS DateTime), 1, 1, CAST(N'2018-01-01T00:00:00.000' AS DateTime), 1)
+INSERT [dbo].[Products] ([ProductId], [Name], [Price], [PictureName], [CreatedOn], [CreatedBy], [ModifiedBy], [ModifiedOn], [IsActive]) VALUES (2, N'Prod0', 150, N'abc', CAST(N'2019-04-11T08:06:45.630' AS DateTime), 1, 1, CAST(N'2019-04-12T21:20:39.840' AS DateTime), 0)
+INSERT [dbo].[Products] ([ProductId], [Name], [Price], [PictureName], [CreatedOn], [CreatedBy], [ModifiedBy], [ModifiedOn], [IsActive]) VALUES (3, N'Prod1', 160, N'abc', CAST(N'2019-04-12T06:33:45.927' AS DateTime), 1, 1, CAST(N'2019-04-12T21:20:45.383' AS DateTime), 1)
+INSERT [dbo].[Products] ([ProductId], [Name], [Price], [PictureName], [CreatedOn], [CreatedBy], [ModifiedBy], [ModifiedOn], [IsActive]) VALUES (4, N'Prod2', 170, N'abc', CAST(N'2019-04-12T16:53:58.163' AS DateTime), 1, 1, CAST(N'2019-04-12T21:20:45.383' AS DateTime), 0)
+INSERT [dbo].[Products] ([ProductId], [Name], [Price], [PictureName], [CreatedOn], [CreatedBy], [ModifiedBy], [ModifiedOn], [IsActive]) VALUES (5, N'Cake', 750, N'HHH', CAST(N'2019-04-12T16:54:07.293' AS DateTime), 1, NULL, NULL, 1)
+INSERT [dbo].[Products] ([ProductId], [Name], [Price], [PictureName], [CreatedOn], [CreatedBy], [ModifiedBy], [ModifiedOn], [IsActive]) VALUES (6, N'Zinger', 300, N'HHH', CAST(N'2019-04-12T16:54:07.883' AS DateTime), 1, NULL, NULL, 0)
+INSERT [dbo].[Products] ([ProductId], [Name], [Price], [PictureName], [CreatedOn], [CreatedBy], [ModifiedBy], [ModifiedOn], [IsActive]) VALUES (7, N'Bar bQue', 200, N'HHH', CAST(N'2019-04-12T16:54:08.417' AS DateTime), 1, NULL, NULL, 0)
+INSERT [dbo].[Products] ([ProductId], [Name], [Price], [PictureName], [CreatedOn], [CreatedBy], [ModifiedBy], [ModifiedOn], [IsActive]) VALUES (8, N'Cold Drink', 100, N'HHH', CAST(N'2019-04-12T16:54:08.800' AS DateTime), 1, NULL, NULL, 1)
+INSERT [dbo].[Products] ([ProductId], [Name], [Price], [PictureName], [CreatedOn], [CreatedBy], [ModifiedBy], [ModifiedOn], [IsActive]) VALUES (9, N'Burger', 250, N'HHH', CAST(N'2019-04-12T16:54:09.153' AS DateTime), 1, NULL, NULL, 0)
+SET IDENTITY_INSERT [dbo].[Products] OFF
+
+SET IDENTITY_INSERT [dbo].[Users] ON 
+
+INSERT [dbo].[Users] ([UserId], [Name], [Login], [Password], [PictureName], [Role], [IsActive], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (1, N'Admin', N'admin', N'123', N'xxx', 1, 1, 0, CAST(N'2018-02-10T00:00:00.000' AS DateTime), NULL, NULL)
+INSERT [dbo].[Users] ([UserId], [Name], [Login], [Password], [PictureName], [Role], [IsActive], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (2, N'user1', N'usr1', N'123', N'yyy', 2, 1, 1, CAST(N'2018-03-13T00:00:00.000' AS DateTime), NULL, NULL)
+INSERT [dbo].[Users] ([UserId], [Name], [Login], [Password], [PictureName], [Role], [IsActive], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (3, N'user2', N'usr2', N'123', N'zzz', 2, 1, 1, CAST(N'2019-01-02T00:00:00.000' AS DateTime), NULL, NULL)
+INSERT [dbo].[Users] ([UserId], [Name], [Login], [Password], [PictureName], [Role], [IsActive], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (4, N'kitra', N'ktr', N'123', N'zzz', 3, 1, 1, CAST(N'2019-03-06T00:00:00.000' AS DateTime), NULL, NULL)
+SET IDENTITY_INSERT [dbo].[Users] OFF
