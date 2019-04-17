@@ -1,4 +1,4 @@
-# PMS-WEB-API
+# PMS-WEB-APi/Database
 Download SQL Server Management Studio, connect met windows authentication.
 Kopieer de query uit DBscript.txt en plak hem in New Query(in MSSMS om de database aan te maken.
 Voeg jouw Database Server Name, dataSource toe in Web.config file.
